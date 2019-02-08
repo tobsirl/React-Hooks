@@ -12,6 +12,10 @@ const Todo = props => {
     setTodoList(todoList.concat(todoName));
   };
 
+  const todoClearHandler = () => {
+    setTodoList(todoList.splice());
+  };
+
   return (
     <React.Fragment>
       <h3>Todo</h3>
@@ -23,6 +27,9 @@ const Todo = props => {
       />
       <button type="button" onClick={todoAddHandler}>
         Add
+      </button>
+      <button type="button" onClick={todoClearHandler}>
+        Clear
       </button>
       <ul>
         {todoList.map(todo => (
