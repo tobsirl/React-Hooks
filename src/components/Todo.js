@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 
 const Todo = props => {
+  // ! Seperated useStates
   const [todoName, setTodoName] = useState('');
   const [todoList, setTodoList] = useState([]);
 
+  // const [todoState, setTodoState] = useState({ userInput: '', todoList: [] });
+
   const inputChangeHandler = event => {
+    // setTodoState({
+    //   userInput: event.target.value,
+    //   todoList: todoState.todoList
+    // });
     setTodoName(event.target.value);
   };
 
   const todoAddHandler = () => {
+    // setTodoState({
+    //   userInput: todoState.userInput,
+    //   todoList: todoState.todoList.concat(todoState.userInput)
+    // });
     setTodoList(todoList.concat(todoName));
   };
 
   const todoClearHandler = () => {
+    // setTodoState({ todoList: todoState.todoList.splice() });
     setTodoList(todoList.splice());
   };
 
