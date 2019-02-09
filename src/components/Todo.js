@@ -17,9 +17,23 @@ const Todo = props => {
         for (const key in todoData) {
           todos.push({ id: key, name: todoData[key].name });
         }
-        // setTodoList(todos);
+        setTodoList(todos);
       });
-  });
+    return () => {
+      console.log('Cleanup');
+    };
+  }, [todoName]);
+
+  const keyDownHandler = event => {
+    console.log(event.key);
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', keyDownHandler);
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, []);
 
   // const [todoState, setTodoState] = useState({ userInput: '', todoList: [] });
 
