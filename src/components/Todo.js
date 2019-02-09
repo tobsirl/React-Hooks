@@ -21,6 +21,7 @@ const Todo = props => {
     //   todoList: todoState.todoList.concat(todoState.userInput)
     // });
     setTodoList(todoList.concat(todoName));
+    
   };
 
   const todoClearHandler = () => {
