@@ -4,16 +4,13 @@ import Todo from './components/Todo';
 import Header from './components/Header';
 import Auth from './components/Auth';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Todo />
-        <Auth />
-      </div>
-    );
-  }
-}
+const app = props => (
+  <div className="App">
+    <Header />
+    <hr />
+    <Todo />
+    <Auth />
+  </div>
+);
 
-export default App;
+export default app;
