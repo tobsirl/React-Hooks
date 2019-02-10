@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Todo from './components/Todo';
 import Header from './components/Header';
+import Auth from './components/Auth';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Todo />
+        <Auth />
       </div>
     );
   }
