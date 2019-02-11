@@ -5,7 +5,20 @@ const Todo = props => {
   // ! Seperated useStates
   const [todoName, setTodoName] = useState('');
   const [submittedTodo, setSubmittedTodo] = useState(null);
-  const [todoList, setTodoList] = useState([]);
+  // const [todoList, setTodoList] = useState([]);
+
+  const todoListReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD':
+        return state.concat(action.payload);
+      case 'SET':
+        return action.payload;
+      case 'REMOVE':
+        return state.filter(todo => todo.id !== action.payload.id);
+      default:
+        return state;
+    }
+  };
 
   useEffect(() => {
     axios
@@ -18,7 +31,7 @@ const Todo = props => {
         for (const key in todoData) {
           todos.push({ id: key, name: todoData[key].name });
         }
-        setTodoList(todos);
+        dispatch({ type: 'SET', payload: todos });
       });
     return () => {
       console.log('Cleanup');
@@ -29,16 +42,7 @@ const Todo = props => {
     console.log(event.key);
   };
 
-  const todoListReducer = (state, action) => {
-    switch (action.type) {
-      case 'ADD':
-        return state;
-      case 'REMOVE':
-        return state;
-      default:
-        return state;
-    }
-  };
+  const [todoList, dispatch] = useReducer(todoListReducer, []);
 
   useEffect(() => {
     document.addEventListener('keydown', keyDownHandler);
@@ -51,7 +55,7 @@ const Todo = props => {
 
   useEffect(() => {
     if (submittedTodo) {
-      setTodoList(todoList.concat(submittedTodo));
+      dispatch({ type: 'ADD', payload: submittedTodo });
     }
   }, [submittedTodo]);
 
@@ -83,10 +87,10 @@ const Todo = props => {
       });
   };
 
-  // const todoClearHandler = () => {
-  //   // setTodoState({ todoList: todoState.todoList.splice() });
-  //   setTodoList(todoList.splice());
-  // };
+  const todoClearHandler = () => {
+    // setTodoState({ todoList: todoState.todoList.splice() });
+    dispatch(todoList.splice());
+  };
 
   return (
     <React.Fragment>
