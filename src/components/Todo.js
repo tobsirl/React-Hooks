@@ -92,6 +92,10 @@ const Todo = props => {
     dispatch(todoList.splice());
   };
 
+  const todoRemoveHandler = todoId => {
+    dispatch({ type: 'REMOVE', payload: todoId });
+  };
+
   return (
     <React.Fragment>
       <h3>Todo</h3>
@@ -109,7 +113,9 @@ const Todo = props => {
       </button>
       <ul>
         {todoList.map(todo => (
-          <li key={todo.id}>{todo.name}</li>
+          <li key={todo.id} onClick={todoRemoveHandler.bind(this, todo.Id)}>
+            {todo.name}
+          </li>
         ))}
       </ul>
     </React.Fragment>
