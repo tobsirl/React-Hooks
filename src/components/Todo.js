@@ -4,7 +4,7 @@ import axios from 'axios';
 const Todo = props => {
   // ! Seperated useStates
   const [todoName, setTodoName] = useState('');
-  const [submittedTodo, setSubmittedTodo] = useState(null);
+  // const [submittedTodo, setSubmittedTodo] = useState(null);
   // const [todoList, setTodoList] = useState([]);
 
   const todoListReducer = (state, action) => {
@@ -53,11 +53,11 @@ const Todo = props => {
 
   // const [todoState, setTodoState] = useState({ userInput: '', todoList: [] });
 
-  useEffect(() => {
-    if (submittedTodo) {
-      dispatch({ type: 'ADD', payload: submittedTodo });
-    }
-  }, [submittedTodo]);
+  // useEffect(() => {
+  //   if (submittedTodo) {
+  //     dispatch({ type: 'ADD', payload: submittedTodo });
+  //   }
+  // }, [submittedTodo]);
 
   const inputChangeHandler = event => {
     // setTodoState({
@@ -80,7 +80,7 @@ const Todo = props => {
       .then(res => {
         console.log(res);
         const todoItem = { id: res.data.name, name: todoName };
-        setSubmittedTodo(todoItem);
+        dispatch({ type: 'ADD', payload: todoItem });
       })
       .catch(err => {
         console.log(err);
