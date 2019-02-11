@@ -14,7 +14,7 @@ const Todo = props => {
       case 'SET':
         return action.payload;
       case 'REMOVE':
-        return state.filter(todo => todo.id !== action.payload.id);
+        return state.filter(todo => todo.id !== action.payload);
       default:
         return state;
     }
@@ -93,7 +93,13 @@ const Todo = props => {
   };
 
   const todoRemoveHandler = todoId => {
-    dispatch({ type: 'REMOVE', payload: todoId });
+    console.log('here');
+    axios
+      .delete(`https://react-hooks-97ea6.firebaseio.com/todos/${todoId}.json`)
+      .then(res => {
+        dispatch({ type: 'REMOVE', payload: todoId });
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -113,7 +119,7 @@ const Todo = props => {
       </button>
       <ul>
         {todoList.map(todo => (
-          <li key={todo.id} onClick={todoRemoveHandler.bind(this, todo.Id)}>
+          <li key={todo.id} onClick={todoRemoveHandler.bind(this, todo.id)}>
             {todo.name}
           </li>
         ))}
