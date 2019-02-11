@@ -15,6 +15,8 @@ const Todo = props => {
         return action.payload;
       case 'REMOVE':
         return state.filter(todo => todo.id !== action.payload);
+      case 'REMOVEALL':
+        return state.splice();
       default:
         return state;
     }
@@ -89,11 +91,10 @@ const Todo = props => {
 
   const todoClearHandler = () => {
     // setTodoState({ todoList: todoState.todoList.splice() });
-    dispatch(todoList.splice());
+    dispatch({ type: 'REMOVEALL' });
   };
 
   const todoRemoveHandler = todoId => {
-    console.log('here');
     axios
       .delete(`https://react-hooks-97ea6.firebaseio.com/todos/${todoId}.json`)
       .then(res => {
