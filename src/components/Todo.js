@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 
 const Todo = props => {
@@ -27,6 +27,17 @@ const Todo = props => {
 
   const keyDownHandler = event => {
     console.log(event.key);
+  };
+
+  const todoListReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD':
+        return state;
+      case 'REMOVE':
+        return state;
+      default:
+        return state;
+    }
   };
 
   useEffect(() => {
@@ -72,10 +83,10 @@ const Todo = props => {
       });
   };
 
-  const todoClearHandler = () => {
-    // setTodoState({ todoList: todoState.todoList.splice() });
-    setTodoList(todoList.splice());
-  };
+  // const todoClearHandler = () => {
+  //   // setTodoState({ todoList: todoState.todoList.splice() });
+  //   setTodoList(todoList.splice());
+  // };
 
   return (
     <React.Fragment>
