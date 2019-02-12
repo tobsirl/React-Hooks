@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import axios from 'axios';
 
 const Todo = props => {
   // ! Seperated useStates
-  const [todoName, setTodoName] = useState('');
+  // const [todoName, setTodoName] = useState('');
   // const [submittedTodo, setSubmittedTodo] = useState(null);
   // const [todoList, setTodoList] = useState([]);
   const todoInputRef = useRef();
@@ -39,7 +39,7 @@ const Todo = props => {
     return () => {
       console.log('Cleanup');
     };
-  }, [todoName]);
+  }, []);
 
   const keyDownHandler = event => {
     console.log(event.key);
@@ -62,19 +62,21 @@ const Todo = props => {
   //   }
   // }, [submittedTodo]);
 
-  const inputChangeHandler = event => {
-    // setTodoState({
-    //   userInput: event.target.value,
-    //   todoList: todoState.todoList
-    // });
-    setTodoName(event.target.value);
-  };
+  // const inputChangeHandler = event => {
+  //   // setTodoState({
+  //   //   userInput: event.target.value,
+  //   //   todoList: todoState.todoList
+  //   // });
+  //   setTodoName(event.target.value);
+  // };
 
-  const todoAddHandler = () => {
+   const todoAddHandler = () => {
     // setTodoState({
     //   userInput: todoState.userInput,
     //   todoList: todoState.todoList.concat(todoState.userInput)
     // });
+
+    const todoName = todoInputRef.current.value;
 
     axios
       .post(`https://react-hooks-97ea6.firebaseio.com/todos.json`, {
@@ -107,12 +109,7 @@ const Todo = props => {
   return (
     <React.Fragment>
       <h3>Todo</h3>
-      <input
-        type="text"
-        placeholder="Todo"
-        onChange={inputChangeHandler}
-        value={todoName}
-      />
+      <input type="text" placeholder="Todo" ref={todoInputRef} />
       <button type="button" onClick={todoAddHandler}>
         Add
       </button>
