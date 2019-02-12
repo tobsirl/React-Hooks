@@ -133,9 +133,12 @@ const Todo = props => {
       <button type="button" onClick={todoClearHandler}>
         Clear
       </button>
-      {useMemo(() => (
-        <List items={todoList} onClick={todoRemoveHandler} />
-      ))}
+      {useMemo(
+        () => (
+          <List items={todoList} onClick={todoRemoveHandler} />
+        ),
+        [todoList]
+      )}
     </React.Fragment>
   );
 };
