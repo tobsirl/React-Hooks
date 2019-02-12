@@ -1,9 +1,10 @@
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useState, useEffect, useReducer, useRef, useMemo } from 'react';
 import axios from 'axios';
 
 import List from './List';
 
 const Todo = props => {
+  const [inputIsValid, setInputIsValid] = useState(false);
   // ! Seperated useStates
   // const [todoName, setTodoName] = useState('');
   // const [submittedTodo, setSubmittedTodo] = useState(null);
@@ -55,6 +56,14 @@ const Todo = props => {
       document.removeEventListener('keydown', keyDownHandler);
     };
   }, []);
+
+  const inputValidationHandler = event => {
+    if (event.target.value.trim() === '') {
+      setInputIsValid(false);
+    } else {
+      setInputIsValid(true);
+    }
+  };
 
   // const [todoState, setTodoState] = useState({ userInput: '', todoList: [] });
 
@@ -111,14 +120,22 @@ const Todo = props => {
   return (
     <React.Fragment>
       <h3>Todo</h3>
-      <input type="text" placeholder="Todo" ref={todoInputRef} />
+      <input
+        type="text"
+        placeholder="Todo"
+        ref={todoInputRef}
+        onChange={inputValidationHandler}
+        style={{ backgroundColor: inputIsValid ? 'transparent' : 'red' }}
+      />
       <button type="button" onClick={todoAddHandler}>
         Add
       </button>
       <button type="button" onClick={todoClearHandler}>
         Clear
       </button>
-      <List  items={todoList} onClick={todoRemoveHandler}/>
+      {useMemo(() => (
+        <List items={todoList} onClick={todoRemoveHandler} />
+      ))}
     </React.Fragment>
   );
 };
