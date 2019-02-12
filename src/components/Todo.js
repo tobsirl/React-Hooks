@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useRef } from 'react';
 import axios from 'axios';
 
 const Todo = props => {
@@ -6,6 +6,7 @@ const Todo = props => {
   const [todoName, setTodoName] = useState('');
   // const [submittedTodo, setSubmittedTodo] = useState(null);
   // const [todoList, setTodoList] = useState([]);
+  const todoInputRef = useRef();
 
   const todoListReducer = (state, action) => {
     switch (action.type) {
