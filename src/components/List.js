@@ -4,9 +4,9 @@ const list = props => {
   console.log('Rendering the list...');
   return (
     <ul>
-      {props.items.todoList.map(todo => (
-        <li key={todo.id} onClick={props.onClick.bind(this, todo.id)}>
-          {todo.name}
+      {props.items.map(item => (
+        <li key={item.id} onClick={props.onClick.bind(this, item.id)}>
+          {item.name}
         </li>
       ))}
     </ul>

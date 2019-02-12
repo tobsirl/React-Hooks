@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import axios from 'axios';
 
+import List from './List';
+
 const Todo = props => {
   // ! Seperated useStates
   // const [todoName, setTodoName] = useState('');
@@ -70,7 +72,7 @@ const Todo = props => {
   //   setTodoName(event.target.value);
   // };
 
-   const todoAddHandler = () => {
+  const todoAddHandler = () => {
     // setTodoState({
     //   userInput: todoState.userInput,
     //   todoList: todoState.todoList.concat(todoState.userInput)
@@ -116,7 +118,7 @@ const Todo = props => {
       <button type="button" onClick={todoClearHandler}>
         Clear
       </button>
-      
+      <List  items={todoList} onClick={todoRemoveHandler}/>
     </React.Fragment>
   );
 };
