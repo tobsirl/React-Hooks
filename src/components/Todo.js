@@ -10,7 +10,7 @@ const Todo = props => {
   // const [todoName, setTodoName] = useState('');
   // const [submittedTodo, setSubmittedTodo] = useState(null);
   // const [todoList, setTodoList] = useState([]);
-  const todoInputRef = useRef();
+  // const todoInputRef = useRef();
   const todoInput = useFormInput();
 
   const todoListReducer = (state, action) => {
@@ -89,7 +89,7 @@ const Todo = props => {
     //   todoList: todoState.todoList.concat(todoState.userInput)
     // });
 
-    const todoName = todoInputRef.current.value;
+    const todoName = todoInput.current.value;
 
     axios
       .post(`https://react-hooks-97ea6.firebaseio.com/todos.json`, {
@@ -125,9 +125,11 @@ const Todo = props => {
       <input
         type="text"
         placeholder="Todo"
-        ref={todoInputRef}
-        onChange={inputValidationHandler}
-        style={{ backgroundColor: inputIsValid ? 'transparent' : 'red' }}
+        onChange={todoInput.onChange}
+        value={todoInput.value}
+        style={{
+          backgroundColor: todoInput.validity === true ? 'transparent' : 'red'
+        }}
       />
       <button type="button" onClick={todoAddHandler}>
         Add
