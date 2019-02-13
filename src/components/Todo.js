@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer, useRef, useMemo } from 'react';
 import axios from 'axios';
 
 import List from './List';
+import { useFormInput } from '../hooks/forms';
 
 const Todo = props => {
   const [inputIsValid, setInputIsValid] = useState(false);
@@ -10,6 +11,7 @@ const Todo = props => {
   // const [submittedTodo, setSubmittedTodo] = useState(null);
   // const [todoList, setTodoList] = useState([]);
   const todoInputRef = useRef();
+  const todoInput = useFormInput();
 
   const todoListReducer = (state, action) => {
     switch (action.type) {
